@@ -13,13 +13,12 @@ if (isset($_POST['insertNewApplicantBtn'])) {
     $email = trim($_POST['email']);
     $experience = trim($_POST['experience']);
 
-    // Check if all required fields are filled
     if (!empty($firstName) && !empty($lastName) && !empty($gender) && !empty($age) && !empty($birthday) && !empty($email) && !empty($experience)) {
         $query = insertIntoFlightAttendantRecords($pdo, $firstName, $lastName, $gender, $age, $birthday, $email, $experience);
 
         if ($query) {
             header("Location: ../index.php");
-            exit; // Ensure script exits after redirect
+            exit; 
         } else {
             echo "Insertion failed";
         }
@@ -29,22 +28,22 @@ if (isset($_POST['insertNewApplicantBtn'])) {
 }
 
 if (isset($_POST['editApplicantBtn'])) {
-    $applicant_id = trim($_POST['applicant_id']); // Getting applicant ID from POST
+    $applicant_id = trim($_POST['applicant_id']);
     $firstName = trim($_POST['firstName']);
     $lastName = trim($_POST['lastName']);
     $gender = trim($_POST['gender']);
     $age = trim($_POST['age']);
-    $birthday = trim($_POST['birthday']); // Capture birthday
+    $birthday = trim($_POST['birthday']); 
     $email = trim($_POST['email']);
     $experience = trim($_POST['experience']);
 
     if (!empty($applicant_id) && !empty($firstName) && !empty($lastName) && !empty($gender) && !empty($age) && !empty($birthday) && !empty($email) && !empty($experience)) {
-        // Call to update function with all required fields
+        
         $query = updateApplicant($pdo, $applicant_id, $firstName, $lastName, $gender, $age, $birthday, $email, $experience);
 
         if ($query) {
             header("Location: ../index.php");
-            exit(); // Make sure to exit after a header redirect
+            exit(); 
         } else {
             echo "Update failed";
         }
@@ -54,13 +53,13 @@ if (isset($_POST['editApplicantBtn'])) {
 }
 
 if (isset($_POST['deleteApplicantBtn'])) {
-    if (isset($_GET['applicant_id'])) { // Ensure applicant ID is accessed correctly
-        $applicant_id = trim($_GET['applicant_id']); // Keep this as $_GET
+    if (isset($_GET['applicant_id'])) {
+        $applicant_id = trim($_GET['applicant_id']);
         $query = deleteApplicant($pdo, $applicant_id);
 
         if ($query) {
             header("Location: ../index.php");
-            exit(); // Make sure to exit after a header redirect
+            exit(); 
         } else {
             echo "Deletion failed";
         }
